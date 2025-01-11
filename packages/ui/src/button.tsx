@@ -18,3 +18,5 @@ export const Button = ({ children, className, appName }: ButtonProps) => {
     </button>
   );
 };
+// for pnpm @repo/typescript-config": "workspace:*",
+//  for npm "@repo/typescript-config": ":*"
