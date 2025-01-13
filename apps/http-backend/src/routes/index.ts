@@ -1,8 +1,19 @@
 import express, { Router } from "express";
 const router: Router = express.Router()
+import { prismaClient } from "@repo/db"
 
-router.get('/sign-up', (req, res) => {
+router.get('/sign-up', async (req, res) => {
     const { firstName, lastName, email, password } = req.body
+    const user = await prismaClient.user.findFirst({
+        where: {
+            email
+        }
+    })
+    if (user) {
+        res.json({
+            msg: "User with Email already exists"
+        })
+    }
     res.json({
         msg: "working"
     })
