@@ -33,11 +33,11 @@ model Room {
 model User {
   userId    String  @id @default(uuid())
   firstName String
-  lastName  String?
+  lastName  String
   photo     String?
   email     String  @unique
   password  String
-  roomId    Int
-  rooms     Room[]
-  chat      Chat[]
+
+  rooms Room[]
+  chat  Chat[]
 }
