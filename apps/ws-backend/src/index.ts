@@ -1,19 +1,39 @@
-import { WebSocketServer } from 'ws';
-
+import { WebSocketServer, WebSocket } from "ws";
+import Jwt from "jsonwebtoken";
+import { JWT_SECRET } from "@repo/backend-common/config"
 const wss = new WebSocketServer({ port: 8080 });
+const sockets: WebSocket[] = []
+const checkUser = (token: string) => {
 
-wss.on('connection', function connection(ws, request) {
-    const url = request.url
+}
+
+wss.on("connection", (socket, request) => {
+    sockets.push(socket)
+    const url = request.url;
     if (!url) {
         return
     }
-    const queryParam = new URLSearchParams(url.split('?')[1]);
-    const token = queryParam.get('token')
-    ws.on('error', console.error);
+    const queryParms = new URLSearchParams(url.split('?')[1])
+    const token = queryParms.get('token') || ""
+    const userId = checkUser(token);
+    const isverified = Jwt.verify(token, JWT_SECRET)
 
-    ws.on('message', function message(data) {
-        console.log('received: %s', data);
-    });
+    socket.on("message", (msg, isBinary) => {
 
-    ws.send('something');
-});
+        try {
+
+            sockets.map((s) => {
+                if (s != socket) {
+                    s.send(msg.toString())
+                }
+            })
+        } catch (error) {
+            console.log(error);
+        }
+
+    })
+    socket.on("error", (err) => {
+        console.log(err);
+    }
+    )
+})
