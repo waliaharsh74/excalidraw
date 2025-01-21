@@ -1,21 +1,23 @@
 import express, { Router } from "express";
 const router: Router = express.Router()
 import { prismaClient } from "@repo/db"
-import { signUpSchema, signInSchema } from "@repo/common/types";
+import { signUpSchema, signInSchema, CreateRoomSchema } from "@repo/common/types";
 import bcrypt from "bcrypt"
 import { JWT_SECRET } from "@repo/backend-common/config"
 import jwt from "jsonwebtoken"
+import { middleware } from "../middleware";
 
-router.get('/sign-up', async (req, res) => {
+router.post('/sign-up', async (req, res) => {
     try {
 
         const { firstName, lastName, email, password } = req.body
         const parsedData = signUpSchema.safeParse(req.body)
 
         if (!parsedData.success) {
-            console.log(parsedData.error);
             res.json({
-                message: parsedData.error.message
+                fieldErros: parsedData.error.flatten().fieldErrors,
+                msg: "Parsing Data failed"
+
             })
             return;
         }
@@ -42,25 +44,28 @@ router.get('/sign-up', async (req, res) => {
             }
         })
         res.json({
-            id: user.userId
+            id: user.userId,
+            msg: "User Created Successfully!"
+
         })
     } catch (error) {
         console.log(error);
         res.json({
-            msg: "Oopa something went wrong"
+            msg: "Oops something went wrong"
         })
 
     }
 
 })
-router.get('/sign-in', async (req, res) => {
+router.post('/sign-in', async (req, res) => {
     const { email, password } = req.body
-    const parsedData = signUpSchema.safeParse(req.body)
+    const parsedData = signInSchema.safeParse(req.body)
 
     if (!parsedData.success) {
         console.log(parsedData.error);
         res.json({
-            message: parsedData.error.message
+            fieldErros: parsedData.error.flatten().fieldErrors,
+            msg: "Parsing Data failed"
         })
         return;
     }
@@ -71,7 +76,8 @@ router.get('/sign-in', async (req, res) => {
         })
         return
     }
-    const isPasswordCorrect = bcrypt.compare(password, user.password);
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    console.log(isPasswordCorrect);
     if (!isPasswordCorrect) {
         res.status(403).json({
             msg: "Wrong Password!!"
@@ -87,13 +93,61 @@ router.get('/sign-in', async (req, res) => {
     })
 
 
+})
+router.post('/create-room', middleware, async (req, res) => {
+    // @ts-ignore: 
+    const userId = req.userId
+    const parsedData = CreateRoomSchema.safeParse(req.body);
+    if (!parsedData.success) {
+        res.json({
+            fieldErrors: parsedData.error.flatten().fieldErrors,
+            msg: "Parsing Data failed"
+        })
+        return
+    }
+    const room = await prismaClient.room.create({
+        data: {
+            slug: parsedData.data.slug,
+            adminId: userId
+        }
+    })
+    res.json({
+        msg: "room created Successfully",
+        roomId: room.roomId
 
-
+    })
 
 
 })
-router.post('/room', (req, res) => {
-    const { email, password } = req.body
+router.post('/get-room/:id', middleware, async (req, res) => {
+    try {
+
+
+        // @ts-ignore: 
+        const userId = req.userId
+
+        const roomId = Number(req.params.id);
+        const chat = await prismaClient.chat.findMany({
+            where: {
+                roomId
+            },
+            orderBy: {
+                id: "desc"
+            },
+            take: 1000
+        })
+        res.json({
+            msg: "messages fetched Successfully",
+            chat: chat
+
+        })
+    } catch (error) {
+        console.log(error);
+
+        res.json({
+            chat: []
+        })
+    }
 
 
 })

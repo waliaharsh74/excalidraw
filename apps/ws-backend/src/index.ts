@@ -4,7 +4,11 @@ import { JWT_SECRET } from "@repo/backend-common/config"
 const wss = new WebSocketServer({ port: 8080 });
 const sockets: WebSocket[] = []
 const checkUser = (token: string) => {
-
+    const isVerified = Jwt.verify(token, JWT_SECRET);
+    // @ts-ignore: 
+    if (!isVerified || isVerified.userId) return null
+    // @ts-ignore: 
+    return isVerified.userId
 }
 
 wss.on("connection", (socket, request) => {
@@ -16,7 +20,10 @@ wss.on("connection", (socket, request) => {
     const queryParms = new URLSearchParams(url.split('?')[1])
     const token = queryParms.get('token') || ""
     const userId = checkUser(token);
-    const isverified = Jwt.verify(token, JWT_SECRET)
+    if (!userId) {
+        socket.close()
+        return
+    }
 
     socket.on("message", (msg, isBinary) => {
 
