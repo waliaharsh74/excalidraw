@@ -151,5 +151,34 @@ router.post('/get-room/:id', middleware, async (req, res) => {
 
 
 })
+router.post('/get-room/:slug', async (req, res) => {
+    try {
+
+
+        // @ts-ignore: 
+        const userId = req.userId
+
+        const slug = (req.params.slug);
+        const roomId = await prismaClient.room.findUnique({
+            where: {
+                slug
+            },
+
+        })
+        res.json({
+            msg: "room-Id fetched Successfully",
+            roomId
+
+        })
+    } catch (error) {
+        console.log(error);
+
+        res.json({
+            chat: []
+        })
+    }
+
+
+})
 
 export default router
