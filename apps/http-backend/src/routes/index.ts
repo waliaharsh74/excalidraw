@@ -119,7 +119,7 @@ router.post('/create-room', middleware, async (req, res) => {
 
 
 })
-router.post('/get-room/:id', middleware, async (req, res) => {
+router.post('/get-room/:id', async (req, res) => {
     try {
 
 
@@ -151,12 +151,8 @@ router.post('/get-room/:id', middleware, async (req, res) => {
 
 
 })
-router.post('/get-room/:slug', async (req, res) => {
+router.post('/get-slug/:slug', async (req, res) => {
     try {
-
-
-        // @ts-ignore: 
-        const userId = req.userId
 
         const slug = (req.params.slug);
         const roomId = await prismaClient.room.findUnique({
@@ -167,14 +163,14 @@ router.post('/get-room/:slug', async (req, res) => {
         })
         res.json({
             msg: "room-Id fetched Successfully",
-            roomId
+            roomId: roomId?.roomId
 
         })
     } catch (error) {
         console.log(error);
 
         res.json({
-            chat: []
+            msg: "room-Id fetching failed",
         })
     }
 

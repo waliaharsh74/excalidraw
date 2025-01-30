@@ -95,7 +95,7 @@ wss.on("connection", (socket, request) => {
                     }
                 })
                 filteredUsers.map((user) => user.ws.send(parsedData.message))
-                console.log(users);
+
             }
 
 
