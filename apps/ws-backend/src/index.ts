@@ -84,24 +84,38 @@ wss.on("connection", (socket, request) => {
             }
 
             if (parsedData.type === "chat") {
-
+                console.log("parsedData", parsedData);
                 const filteredUsers = users.filter((user) => user.rooms.includes(parsedData.roomId))
+
                 await prismaClient.chat.create({
                     data: {
-                        roomId: parsedData.roomId,
+                        roomId: parseInt(parsedData.roomId, 10),
                         message: parsedData.message,
                         userId
 
                     }
                 })
-                filteredUsers.map((user) => user.ws.send(parsedData.message))
+                console.log(users);
+
+                users.forEach(user => {
+                    if (user.rooms.includes(parsedData.roomId)) {
+                        user.ws.send(JSON.stringify({
+                            type: "chat",
+                            message: parsedData.message,
+                            roomId: parsedData.roomId
+                        }))
+                        console.log("yes");
+                    }
+                })
+
+
 
             }
 
 
         } catch (error) {
-            console.log(error);
-            socket.close()
+            // console.log(error);
+            // socket.close()
         }
 
     })

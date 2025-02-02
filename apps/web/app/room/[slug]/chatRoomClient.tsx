@@ -10,8 +10,7 @@ export function ChatRoomClient({
     messages: { message: string }[],
     roomId: string
 }) {
-    console.log("messages", messages);
-    console.log("room", roomId);
+
     const [chat, setChats] = useState(messages)
     const [currentMsg, setCurrentMsg] = useState('')
     const { socket, loading } = useSocket()
@@ -20,22 +19,26 @@ export function ChatRoomClient({
             alert("write something to send")
             return
         }
-
-        socket?.send(JSON.stringify({
+        const toSend = JSON.stringify({
             type: "chat",
-            roomId,
+            roomId: roomId.toString(),
             message: currentMsg
-        }))
+        })
+        console.log(toSend);
+        socket?.send(toSend)
+
         setCurrentMsg("")
     }
     useEffect(() => {
         if (socket && !loading) {
+            console.log(socket);
             socket.send(JSON.stringify({
                 type: "join_room",
                 roomId
             }))
             socket.onmessage = (event) => {
                 alert("message")
+                console.log(event.data);
                 const parsedData = JSON.parse(event.data)
                 if (parsedData.type == 'chat') {
                     setChats((c) => [...c, { message: parsedData.message }])
