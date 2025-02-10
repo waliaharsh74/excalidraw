@@ -36,13 +36,26 @@ export function ChatRoomClient({
                 type: "join_room",
                 roomId
             }))
-            socket.onmessage = (event) => {
-                alert("message")
-                console.log(event.data);
+            const messageHandler = (event: MessageEvent) => {
                 const parsedData = JSON.parse(event.data)
-                if (parsedData.type == 'chat') {
-                    setChats((c) => [...c, { message: parsedData.message }])
+                if (parsedData.type === 'chat') {
+                    setChats((prevChats) => [...prevChats, { message: parsedData.message }])
                 }
+            }
+            socket.addEventListener("message", messageHandler)
+            return () => {
+                socket.removeEventListener("message", messageHandler)
+                socket.send(JSON.stringify({
+                    type: "leave_room",
+                    roomId
+                }))
+            }
+
+        }
+
+        return () => {
+            if (socket) {
+                socket.close()
             }
         }
     }, [socket, loading, roomId])

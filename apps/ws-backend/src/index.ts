@@ -45,17 +45,22 @@ wss.on("connection", (socket, request) => {
         return
     }
 
-    users.push({
-        ws: socket,
-        userId,
-        rooms: []
-    })
+    const existingUser = users.find((user) => user.userId === userId);
+    if (existingUser) {
+        existingUser.ws = socket;
+    } else {
+        users.push({
+            ws: socket,
+            userId,
+            rooms: []
+        });
+    }
 
     socket.on("message", async (msg) => {
         try {
 
 
-            // if (typeof msg !== 'string') return
+
             let parsedData;
             if (typeof msg !== "string") {
                 parsedData = JSON.parse(msg.toString());
@@ -64,14 +69,15 @@ wss.on("connection", (socket, request) => {
             }
 
             if (parsedData.type === "join_room") {
+                const roomId = parsedData.roomId.toString();
 
-                const user = users.find((x) => x.ws);
+                const user = users.find((x) => x.userId == userId);
                 if (!user) {
                     socket.close()
                     return
                 }
-                user?.rooms.push(parsedData.roomId)
-                console.log(users);
+                if (!user.rooms.includes(roomId)) user?.rooms.push(roomId)
+
             }
 
             if (parsedData.type === "leave_room") {
@@ -82,10 +88,10 @@ wss.on("connection", (socket, request) => {
                 }
                 user?.rooms.filter((x) => x == parsedData.room)
             }
-
+            console.log("parsedData", parsedData);
             if (parsedData.type === "chat") {
-                console.log("parsedData", parsedData);
-                const filteredUsers = users.filter((user) => user.rooms.includes(parsedData.roomId))
+
+
 
                 await prismaClient.chat.create({
                     data: {
@@ -95,18 +101,25 @@ wss.on("connection", (socket, request) => {
 
                     }
                 })
-                console.log(users);
+
 
                 users.forEach(user => {
-                    if (user.rooms.includes(parsedData.roomId)) {
-                        user.ws.send(JSON.stringify({
-                            type: "chat",
-                            message: parsedData.message,
-                            roomId: parsedData.roomId
-                        }))
-                        console.log("yes");
+
+                    if (user.rooms && user.rooms.includes(parsedData.roomId)) {
+                        if (user.ws && user.ws.readyState === WebSocket.OPEN) {
+                            user.ws.send(JSON.stringify({
+                                type: "chat",
+                                message: parsedData.message,
+                                roomId: parsedData.roomId
+                            }));
+                            console.log("Message sent to user:", user.userId);
+                        } else {
+                            console.log(`WebSocket not open for user ${user.userId}`);
+                        }
+                    } else {
+                        console.log(`User ${user.userId} is not in room ${parsedData.roomId}`);
                     }
-                })
+                });
 
 
 
@@ -114,7 +127,7 @@ wss.on("connection", (socket, request) => {
 
 
         } catch (error) {
-            // console.log(error);
+            console.log(error);
             // socket.close()
         }
 
