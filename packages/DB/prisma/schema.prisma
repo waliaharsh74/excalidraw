@@ -29,6 +29,7 @@ model Room {
   admin     User     @relation(fields: [adminId], references: [userId])
   chats     Chat[]
   createdAt DateTime @default(now())
+  Shapes    Shape[]
 }
 
 model User {
@@ -41,4 +42,10 @@ model User {
 
   rooms Room[]
   chat  Chat[]
+}
+
+model Shape {
+  shapeId Int    @id @default(autoincrement())
+  roomId  Room   @relation(fields: [shapeId], references: [roomId])
+  type    String
 }

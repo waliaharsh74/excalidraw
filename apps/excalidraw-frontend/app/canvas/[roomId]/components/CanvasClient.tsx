@@ -16,6 +16,10 @@ const CanvasClient = ({ roomId }: { roomId: number }) => {
             console.log("connected to ws");
             setSocket(ws);
             setLoading(true)
+            ws?.send(JSON.stringify({
+                type: "join_room",
+                roomId
+            }))
         }
 
 

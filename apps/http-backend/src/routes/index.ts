@@ -176,5 +176,28 @@ router.post('/get-slug/:slug', async (req, res) => {
 
 
 })
+router.post('/get-shapes/:id', async (req, res) => {
+    try {
+
+        const roomId = Number(req.params.id);
+        const allMessages = await prismaClient.chat.findMany({
+            where: {
+                roomId
+            }
+        })
+        // const shape=allMessages.filter(())
+
+
+
+    } catch (error) {
+        console.log(error);
+
+        res.json({
+            msg: "fetching shapes failed",
+        })
+    }
+
+
+})
 
 export default router
