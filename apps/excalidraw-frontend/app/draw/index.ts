@@ -1,25 +1,13 @@
-type Shape = {
-    type: "rectangle",
-    x: number,
-    y: number,
-    width: number,
-    height: number
-} | {
-    type: "circle",
-    x: number,
-    y: number,
-    radius: number,
-
-} | {
-
-    type: "pencil",
-    points: { x: number, y: number }[]
-}
+import { HTTP_BACKEND_URL } from "../config";
+import { Shape } from "../types";
+import axios from "axios";
 
 
-function initDraw(canvas: HTMLCanvasElement, shape: string) {
+
+async function initDraw(canvas: HTMLCanvasElement, shape: string, roomId: number) {
     console.log("shape", shape);
-    const existingShapes: Shape[] = []
+    const existingShapes: Shape[] = await getExistingShapes(roomId)
+
 
 
     const ctx = canvas.getContext("2d")
@@ -29,8 +17,7 @@ function initDraw(canvas: HTMLCanvasElement, shape: string) {
     let clicked = false;
     let startX = 0;
     let startY = 0;
-    let endX = 0;
-    let endY = 0;
+
     let currentPencilPoints: { x: number, y: number }[] = [];
 
 
@@ -41,7 +28,7 @@ function initDraw(canvas: HTMLCanvasElement, shape: string) {
         startY = e.offsetY
         if (shape === "pencil") {
             currentPencilPoints = [{ x: startX, y: startY }];
-        } else {
+        } else if (shape === "rectangle ") {
             ctx.beginPath();
             ctx.moveTo(startX, startY);
         }
@@ -66,8 +53,15 @@ function initDraw(canvas: HTMLCanvasElement, shape: string) {
                 currentPencilPoints.push({ x: endX, y: endY });
                 ctx.strokeStyle = "rgba(255, 255, 255)";
                 ctx.beginPath();
-                ctx.moveTo(currentPencilPoints[currentPencilPoints.length - 2]?.x || startX, currentPencilPoints[currentPencilPoints.length - 2]?.y || startY);
-                ctx.lineTo(endX, endY);
+                currentPencilPoints.forEach((point, index) => {
+                    if (index === 0) {
+                        ctx.moveTo(point.x, point.y);
+                    } else {
+                        ctx.lineTo(point.x, point.y);
+                    }
+                });
+                // ctx.moveTo(currentPencilPoints[currentPencilPoints.length - 2]?.x || startX, currentPencilPoints[currentPencilPoints.length - 2]?.y || startY);
+                // ctx.lineTo(endX, endY);
                 ctx.stroke();
             }
 
@@ -91,7 +85,7 @@ function initDraw(canvas: HTMLCanvasElement, shape: string) {
                 height
             })
         }
-        if (shape == "pencil") {
+        else if (shape == "pencil") {
 
             existingShapes.push({
                 type: "pencil",
@@ -131,6 +125,10 @@ function clearCanvas(existingShapes: Shape[], canvas: HTMLCanvasElement, ctx: Ca
         }
     })
 
+}
+async function getExistingShapes(roomId: number) {
+    const shapes = await axios.get(`${HTTP_BACKEND_URL}/${roomId}`)
+    return shapes
 }
 
 

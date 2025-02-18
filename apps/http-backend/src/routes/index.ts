@@ -176,16 +176,19 @@ router.post('/get-slug/:slug', async (req, res) => {
 
 
 })
-router.post('/get-shapes/:id', async (req, res) => {
+router.get('/get-shapes/:id', async (req, res) => {
     try {
 
         const roomId = Number(req.params.id);
-        const allMessages = await prismaClient.chat.findMany({
+        const allShapes = await prismaClient.room.findUnique({
             where: {
                 roomId
             }
         })
-        // const shape=allMessages.filter(())
+        res.json({
+            shapes: allShapes
+        })
+
 
 
 

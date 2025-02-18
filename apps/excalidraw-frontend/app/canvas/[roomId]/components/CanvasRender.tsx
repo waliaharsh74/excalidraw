@@ -1,13 +1,15 @@
 import initDraw from '@/app/draw'
 import React, { useEffect, useRef, useState } from 'react'
 
+
+
 const CanvasRender = ({ socket, roomId }: { socket: WebSocket | null, roomId: number }) => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const [selectedShape, setSelectedShape] = useState('')
 
     useEffect(() => {
 
-        if (canvasRef.current) initDraw(canvasRef.current, selectedShape)
+        if (canvasRef.current) initDraw(canvasRef.current, selectedShape, roomId)
 
     }, [canvasRef, selectedShape])
     return (
