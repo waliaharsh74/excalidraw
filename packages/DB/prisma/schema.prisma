@@ -45,12 +45,13 @@ model User {
 }
 
 model Shape {
-  shapeId Int     @id @default(autoincrement())
-  roomId  Room    @relation(fields: [shapeId], references: [roomId])
+  shapeId Int    @id @default(autoincrement())
+  roomId  Int
+  room    Room   @relation(fields: [roomId], references: [roomId])
   type    String
-  x       String
-  y       String
-  height  String?
-  width   String?
-  radius  String?
+  x       Int
+  y       Int
+  height  Int?
+  width   Int?
+  radius  Int?
 }

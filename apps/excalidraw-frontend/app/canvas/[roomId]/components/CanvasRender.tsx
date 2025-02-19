@@ -9,7 +9,7 @@ const CanvasRender = ({ socket, roomId }: { socket: WebSocket | null, roomId: nu
 
     useEffect(() => {
 
-        if (canvasRef.current) initDraw(canvasRef.current, selectedShape, roomId)
+        if (canvasRef.current && socket) initDraw(canvasRef.current, selectedShape, roomId, socket)
 
     }, [canvasRef, selectedShape])
     return (

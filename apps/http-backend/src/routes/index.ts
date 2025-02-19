@@ -180,7 +180,7 @@ router.get('/get-shapes/:id', async (req, res) => {
     try {
 
         const roomId = Number(req.params.id);
-        const allShapes = await prismaClient.room.findUnique({
+        const allShapes = await prismaClient.shape.findMany({
             where: {
                 roomId
             }

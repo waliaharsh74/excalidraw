@@ -4,9 +4,10 @@ import axios from "axios";
 
 
 
-async function initDraw(canvas: HTMLCanvasElement, shape: string, roomId: number) {
-    console.log("shape", shape);
-    const existingShapes: Shape[] = await getExistingShapes(roomId)
+async function initDraw(canvas: HTMLCanvasElement, shape: string, roomId: number, socket: WebSocket) {
+    const { shapes } = await getExistingShapes(roomId)
+    console.log("shapes", shapes);
+    const existingShapes: Shape[] = shapes
 
 
 
@@ -84,6 +85,17 @@ async function initDraw(canvas: HTMLCanvasElement, shape: string, roomId: number
                 width,
                 height
             })
+            const msg = JSON.stringify({
+                type: "shape",
+                shapeType: "rectangle",
+                x: startX,
+                y: startY,
+                width,
+                height,
+                roomId
+            })
+            console.log(msg);
+            socket.send(msg)
         }
         else if (shape == "pencil") {
 
@@ -127,9 +139,10 @@ function clearCanvas(existingShapes: Shape[], canvas: HTMLCanvasElement, ctx: Ca
 
 }
 async function getExistingShapes(roomId: number) {
-    const shapes = await axios.get(`${HTTP_BACKEND_URL}/${roomId}`)
-    return shapes
+    console.log(`${HTTP_BACKEND_URL}/${roomId}`);
+    const shapes = await axios.get(`${HTTP_BACKEND_URL}/api/v1/get-shapes/${roomId}`)
+    return shapes.data
 }
 
 
-export default initDraw
+export default initDraw 

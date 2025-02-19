@@ -124,6 +124,48 @@ wss.on("connection", (socket, request) => {
 
 
             }
+            if (parsedData.type === "shape") {
+
+                console.log(parsedData);
+
+                await prismaClient.shape.create({
+                    data: {
+                        roomId: parseInt(parsedData.roomId, 10),
+                        x: parsedData.x,
+                        y: parsedData.y,
+                        height: parsedData.height,
+                        width: parsedData.width,
+                        type: parsedData.shapeType
+
+                    }
+                })
+                console.log("ok");
+
+
+                users.forEach(user => {
+
+                    if (user.rooms && user.rooms.includes(parsedData.roomId)) {
+                        if (user.ws && user.ws.readyState === WebSocket.OPEN) {
+                            user.ws.send(JSON.stringify({
+                                type: "shape",
+                                x: parsedData.x,
+                                y: parsedData.y,
+                                ShapeType: parsedData.shapeType,
+                                roomId: parsedData.roomId,
+                                ...parsedData
+                            }));
+                            console.log("Message sent to user:", user.userId);
+                        } else {
+                            console.log(`WebSocket not open for user ${user.userId}`);
+                        }
+                    } else {
+                        console.log(`User ${user.userId} is not in room ${parsedData.roomId}`);
+                    }
+                });
+
+
+
+            }
 
 
         } catch (error) {
