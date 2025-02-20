@@ -127,7 +127,7 @@ wss.on("connection", (socket, request) => {
             if (parsedData.type === "shape") {
 
                 console.log(parsedData);
-
+                const { x, y, shapeType, type, roomId, ...left } = parsedData
                 await prismaClient.shape.create({
                     data: {
                         roomId: parseInt(parsedData.roomId, 10),
@@ -142,6 +142,7 @@ wss.on("connection", (socket, request) => {
                 console.log("ok");
 
 
+
                 users.forEach(user => {
 
                     if (user.rooms && user.rooms.includes(parsedData.roomId)) {
@@ -152,7 +153,7 @@ wss.on("connection", (socket, request) => {
                                 y: parsedData.y,
                                 ShapeType: parsedData.shapeType,
                                 roomId: parsedData.roomId,
-                                ...parsedData
+                                ...left
                             }));
                             console.log("Message sent to user:", user.userId);
                         } else {

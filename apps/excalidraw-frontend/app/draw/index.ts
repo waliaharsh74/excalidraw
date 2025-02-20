@@ -14,7 +14,24 @@ async function initDraw(canvas: HTMLCanvasElement, shape: string, roomId: number
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
-    ctx.fillStyle = "rgba(0,0,0)"
+    // ctx.fillStyle = "rgba(0,0,0)"
+
+    socket.onmessage = (event) => {
+        const { type, shapeType, ...left } = JSON.parse(event.data);
+        console.log("object");
+
+        if (type == "shape") {
+            const toPush = {
+                type: shapeType,
+                ...left
+            }
+            existingShapes.push(toPush)
+            console.log("len", existingShapes.length);
+            clearCanvas(existingShapes, canvas, ctx);
+        }
+    }
+    clearCanvas(existingShapes, canvas, ctx)
+
     let clicked = false;
     let startX = 0;
     let startY = 0;

@@ -19,7 +19,7 @@ const CanvasRender = ({ socket, roomId }: { socket: WebSocket | null, roomId: nu
                 <button onClick={() => { setSelectedShape("circle") }}>circle</button>
                 <button onClick={() => { setSelectedShape("pencil") }}>pencil</button>
             </div>
-            <canvas className="" ref={canvasRef} width={1422} height={670}></canvas>
+            <canvas className=" bg-black" ref={canvasRef} width={1422} height={670}></canvas>
 
         </div>
     )
