@@ -139,8 +139,6 @@ wss.on("connection", (socket, request) => {
 
                     }
                 })
-                console.log("ok");
-
 
 
                 users.forEach(user => {
