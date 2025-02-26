@@ -14,19 +14,20 @@ async function initDraw(canvas: HTMLCanvasElement, shape: string, roomId: number
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
-    // ctx.fillStyle = "rgba(0,0,0)"
 
     socket.onmessage = (event) => {
-        const { type, shapeType, ...left } = JSON.parse(event.data);
-        console.log("object");
+        
+        const { type, ShapeType, ...left } = JSON.parse(event.data);
+        console.log("object",event.data);
 
         if (type == "shape") {
             const toPush = {
-                type: shapeType,
+                type: ShapeType,
                 ...left
             }
+            console.log("tpush",toPush);
             existingShapes.push(toPush)
-            console.log("len", existingShapes.length);
+          
             clearCanvas(existingShapes, canvas, ctx);
         }
     }
@@ -39,7 +40,6 @@ async function initDraw(canvas: HTMLCanvasElement, shape: string, roomId: number
     let currentPencilPoints: { x: number, y: number }[] = [];
 
 
-    // ctx?.strokeRect(25, 25, 100, 100)
     canvas.addEventListener("mousedown", (e) => {
         clicked = true
         startX = e.offsetX
@@ -78,8 +78,7 @@ async function initDraw(canvas: HTMLCanvasElement, shape: string, roomId: number
                         ctx.lineTo(point.x, point.y);
                     }
                 });
-                // ctx.moveTo(currentPencilPoints[currentPencilPoints.length - 2]?.x || startX, currentPencilPoints[currentPencilPoints.length - 2]?.y || startY);
-                // ctx.lineTo(endX, endY);
+               
                 ctx.stroke();
             }
 
@@ -135,7 +134,7 @@ function clearCanvas(existingShapes: Shape[], canvas: HTMLCanvasElement, ctx: Ca
     ctx.fillStyle = "rgba(0, 0, 0)"
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    existingShapes.map((shape) => {
+    existingShapes?.map((shape) => {
         if (shape.type === "rectangle") {
             ctx.strokeStyle = "rgba(255, 255, 255)"
             ctx.strokeRect(shape.x, shape.y, shape.width, shape.height);
