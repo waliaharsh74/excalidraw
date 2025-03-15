@@ -2,8 +2,20 @@
 
 import Link from "next/link"
 import { motion } from "framer-motion"
+import { useEffect, useState } from "react"
+import {useRouter} from "next/navigation"
 
 export default function Home() {
+  const [login,setLogin]=useState(false);
+  const router = useRouter();
+  useEffect(()=>{
+    const userLogin=localStorage.getItem("shapeSmithToken")
+    if(userLogin){
+      setLogin(true)
+      router.push('/home')
+      
+    }
+  })
   return (
     <div className="text-center text-white">
       <motion.h1
@@ -12,7 +24,7 @@ export default function Home() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        Welcome to Auth Demo
+        Welcome to Shape Smith
       </motion.h1>
       <motion.p
         className="text-xl mb-8"
@@ -20,7 +32,7 @@ export default function Home() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5, duration: 0.5 }}
       >
-        Experience a creative authentication journey with animations and style.
+        Draw shapes with friends
       </motion.p>
       <motion.div
         className="space-x-4"

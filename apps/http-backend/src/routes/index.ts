@@ -105,6 +105,18 @@ router.post('/create-room', middleware, async (req, res) => {
         })
         return
     }
+    const isSlug=await prismaClient.room.findFirst({
+        where:{
+            slug:parsedData.data.slug
+        }
+    })
+    if(isSlug){
+        res.json({
+            fieldErrors:"Bad Request",
+            msg: "Slug with this name already exists!"
+        })
+        return
+    }
     const room = await prismaClient.room.create({
         data: {
             slug: parsedData.data.slug,
