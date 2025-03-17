@@ -49,9 +49,11 @@ model Shape {
   roomId  Int
   room    Room   @relation(fields: [roomId], references: [roomId])
   type    String
-  x       Int
-  y       Int
+  x       Int?
+  y       Int?
   height  Int?
   width   Int?
   radius  Int?
+  color   String?
+  points  Json? 
 }

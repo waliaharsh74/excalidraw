@@ -1,0 +1,59 @@
+"use client"
+
+import Link from "next/link"
+import { motion } from "framer-motion"
+import { useEffect, useState } from "react"
+import {useRouter} from "next/navigation"
+
+export default function Home() {
+  const [login,setLogin]=useState(false);
+  const router = useRouter();
+  useEffect(()=>{
+    const userLogin=localStorage.getItem("shapeSmithToken")
+    if(userLogin){
+      setLogin(true)
+      router.push('/home')
+      
+    }
+  })
+  return (
+    <div className="text-center text-white">
+      <motion.h1
+        className="text-6xl font-bold mb-6"
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        Welcome to Shape Smith
+      </motion.h1>
+      <motion.p
+        className="text-xl mb-8"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5, duration: 0.5 }}
+      >
+        Draw shapes with friends
+      </motion.p>
+      <motion.div
+        className="space-x-4"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1, duration: 0.5 }}
+      >
+        <Link   
+          href="/create-room"
+          className="bg-white text-purple-600 font-bold py-3 px-6 rounded-full inline-block transition-transform hover:scale-105"
+        >
+          Create Room
+        </Link>
+        <Link
+          href="/join-room"
+          className="bg-purple-600 text-white font-bold py-3 px-6 rounded-full inline-block transition-transform hover:scale-105"
+        >
+          Join Room
+        </Link>
+      </motion.div>
+    </div>
+  )
+}
+

@@ -127,31 +127,54 @@ wss.on("connection", (socket, request) => {
             if (parsedData.type === "shape") {
 
                 console.log(parsedData);
-                const { x, y, shapeType, type, roomId, ...left } = parsedData
-                await prismaClient.shape.create({
-                    data: {
-                        roomId: parseInt(parsedData.roomId, 10),
-                        x: parsedData.x,
-                        y: parsedData.y,
-                        height: parsedData.height,
-                        width: parsedData.width,
-                        type: parsedData.shapeType
+                const { shapeType, type, roomId, color, ...shapeData } = parsedData
+                const shapePayload: any = {
+                    roomId: parseInt(roomId, 10),
+                    type: shapeType,
+                    color: color || "#FFFFFF", 
+                };
 
-                    }
-                })
+                switch (shapeType) {
+                    case "rectangle":
+                        shapePayload.x = shapeData.x;
+                        shapePayload.y = shapeData.y;
+                        shapePayload.width = shapeData.width;
+                        shapePayload.height = shapeData.height;
+                        break;
+                    case "circle":
+                        shapePayload.x = shapeData.x;
+                        shapePayload.y = shapeData.y;
+                        shapePayload.radius = shapeData.radius;
+                        break;
+                    case "pencil":
+                        shapePayload.points = shapeData.points; 
+                        break;
+                    case "text":
+                        shapePayload.x = shapeData.x;
+                        shapePayload.y = shapeData.y;
+                        shapePayload.text = shapeData.text;
+                        break;
+                    default:
+                        console.error("Unknown shape type:", shapeType);
+                        return;
+                }
+
+                await prismaClient.shape.create({
+                    data: shapePayload,
+                });
+               
 
 
                 users.forEach(user => {
 
-                    if (user.rooms && user.rooms.includes(parsedData.roomId)) {
+                    if (user.rooms && user.rooms.includes(parsedData.roomId && user.ws!=socket)) {
                         if (user.ws && user.ws.readyState === WebSocket.OPEN) {
                             user.ws.send(JSON.stringify({
                                 type: "shape",
-                                x: parsedData.x,
-                                y: parsedData.y,
                                 ShapeType: parsedData.shapeType,
                                 roomId: parsedData.roomId,
-                                ...left
+                                color,
+                                ...shapeData
                             }));
                             console.log("Message sent to user:", user.userId);
                         } else {

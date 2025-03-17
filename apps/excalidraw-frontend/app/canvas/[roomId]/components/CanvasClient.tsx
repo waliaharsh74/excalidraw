@@ -10,7 +10,8 @@ const CanvasClient = ({ roomId }: { roomId: number }) => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        const ws = new WebSocket(`${WS_BACKEND_URL}?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5NzA5ZWM3ZS0zOTI5LTRmNWItOWNjZi02ZTc5MGFlYmIxMjYiLCJpYXQiOjE3Mzc4MTIxODN9.fZTMYZTRypbDXPeVK4tKi7brk7nASJh5pY6MIn_r2_g`)
+        const token = localStorage.getItem("shapeSmithToken")
+        const ws = new WebSocket(`${WS_BACKEND_URL}?token=${token}`)
 
         ws.onopen = (e) => {
             console.log("connected to ws");
