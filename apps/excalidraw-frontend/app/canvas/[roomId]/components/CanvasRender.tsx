@@ -47,7 +47,6 @@ const CanvasRender = ({ socket, roomId }: { socket: WebSocket | null; roomId: nu
                 <button onClick={() => setSelectedShape('text')} className="px-4 py-2 text-white rounded">
                     Text
                 </button>
-                {/* Add a pan tool */}
                 <button onClick={() => setSelectedShape('pan')} className="px-4 py-2 text-white rounded">
                     Pan
                 </button>

@@ -167,7 +167,7 @@ wss.on("connection", (socket, request) => {
 
                 users.forEach(user => {
 
-                    if (user.rooms && user.rooms.includes(parsedData.roomId && user.ws!=socket)) {
+                    if (user.rooms && user.rooms.includes(parsedData.roomId )) {
                         if (user.ws && user.ws.readyState === WebSocket.OPEN) {
                             user.ws.send(JSON.stringify({
                                 type: "shape",

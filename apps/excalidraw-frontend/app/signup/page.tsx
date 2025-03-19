@@ -53,9 +53,9 @@ export default function SignUp() {
 
     return (
         <div>
-        <div className="max-w-md mx-auto bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg p-8 rounded-lg shadow-lg">
+        <div className="max-w-md mx-auto  bg-opacity-20 backdrop-filter backdrop-blur-lg p-8 rounded-lg shadow-lg">
             <motion.h1
-                className="text-4xl font-bold mb-6 text-center text-white"
+                className="text-4xl font-bold mb-6 text-center "
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
@@ -70,7 +70,7 @@ export default function SignUp() {
                 transition={{ delay: 0.2, duration: 0.5 }}
             >
                 <div>
-                    <label htmlFor="firstName" className="block mb-1 text-white">
+                    <label htmlFor="firstName" className="block mb-1 ">
                         First Name
                     </label>
                     <input
@@ -79,12 +79,12 @@ export default function SignUp() {
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                         required
-                        className="w-full px-3 py-2 border rounded bg-white bg-opacity-50 focus:bg-opacity-70 transition-all"
+                        className="w-full px-3 py-2 border rounded  bg-opacity-50 focus:bg-opacity-70 transition-all"
                     />
-                        {err && err?.firstName && <div className="text-white">{err?.firstName[0]}</div>}
+                        {err && err?.firstName && <div className="">{err?.firstName[0]}</div>}
                 </div>
                 <div>
-                    <label htmlFor="lastName" className="block mb-1 text-white">
+                    <label htmlFor="lastName" className="block mb-1 ">
                         Last Name
                     </label>
                     <input
@@ -93,12 +93,12 @@ export default function SignUp() {
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
                         required
-                        className="w-full px-3 py-2 border rounded bg-white bg-opacity-50 focus:bg-opacity-70 transition-all"
+                        className="w-full px-3 py-2 border rounded  bg-opacity-50 focus:bg-opacity-70 transition-all"
                     />
-                        {err && err?.lastName && <div className="text-white">{err?.lastName[0]}</div>}
+                        {err && err?.lastName && <div className="">{err?.lastName[0]}</div>}
                 </div>
                 <div>
-                    <label htmlFor="email" className="block mb-1 text-white">
+                    <label htmlFor="email" className="block mb-1 ">
                         Email
                     </label>
                     <input
@@ -107,12 +107,12 @@ export default function SignUp() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="w-full px-3 py-2 border rounded bg-white bg-opacity-50 focus:bg-opacity-70 transition-all"
+                        className="w-full px-3 py-2 border rounded  bg-opacity-50 focus:bg-opacity-70 transition-all"
                     />
-                        {err && err?.email && <div className="text-white">{err?.email[0]}</div>}
+                        {err && err?.email && <div className="">{err?.email[0]}</div>}
                 </div>
                 <div>
-                    <label htmlFor="password" className="block mb-1 text-white">
+                    <label htmlFor="password" className="block mb-1 ">
                         Password
                     </label>
                     <input
@@ -121,13 +121,13 @@ export default function SignUp() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
-                        className="w-full px-3 py-2 border rounded bg-white bg-opacity-50 focus:bg-opacity-70 transition-all"
+                        className="w-full px-3 py-2 border rounded  bg-opacity-50 focus:bg-opacity-70 transition-all"
                     />
-                        {err && err?.password && <div className="text-white">{err?.password[0]}</div>}
+                        {err && err?.password && <div className="">{err?.password[0]}</div>}
                 </div>
                 <motion.button
                     type="submit"
-                    className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded transition-colors"
+                    className="w-full bg-purple-600 hover:bg-purple-700  font-bold py-2 px-4 rounded transition-colors"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                 >

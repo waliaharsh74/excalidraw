@@ -1,0 +1,137 @@
+"use client"
+import { useState, useEffect } from 'react';
+import Link  from 'next/link';
+import { Button } from "../components/ui/button";
+import { Menu, UserIcon, X } from 'lucide-react';
+import { useRouter } from "next/navigation";
+
+
+const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+   const [login, setLogin] = useState(false);
+      const router = useRouter();
+      const handleLogOut =()=>{
+        localStorage.removeItem("shapeSmithToken")
+        setLogin(false)
+        router.push('/')
+      }
+      
+  useEffect(() => {
+    const userLogin = localStorage.getItem("shapeSmithToken")
+
+    if (userLogin) {
+      setLogin(true)
+
+    }
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [login]);
+
+  return (
+    <nav 
+      className={`fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-10 transition-all duration-300 ${
+        isScrolled ? 'bg-white/80 backdrop-blur-lg shadow-sm' : 'bg-transparent'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        <Link 
+          href="/" 
+          className="flex items-center space-x-2"
+        >
+          <div className="w-8 h-8 relative">
+            <div className="absolute inset-0 bg-blue-500 rounded-md rotate-45 transform -translate-x-1 translate-y-1"></div>
+            <div className="absolute inset-0 bg-purple-500 rounded-md"></div>
+          </div>
+          <span className="text-xl font-semibold tracking-tight">Shapesmith</span>
+        </Link>
+
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center space-x-8">
+         
+          {!login && <div className="flex items-center space-x-4">
+            <Link href="/signin">
+              <Button variant="ghost" size="sm" className="px-4">
+                Sign In
+              </Button>
+            </Link>
+            <Link href="/signup">
+              <Button size="sm" className="px-4">
+                Sign Up
+              </Button>
+            </Link>
+          </div>}
+          {login && <div className="flex items-center space-x-4">
+            
+            
+              <Button size="sm" className="px-4" onClick={handleLogOut}>
+              <UserIcon className="h-5 w-5 mr-1" />
+              Logout
+              </Button>
+           
+          </div>}
+          
+        </div>
+
+        <div className="md:hidden">
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </Button>
+        </div>
+      </div>
+
+      {mobileMenuOpen && (
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-lg border-b border-gray-200 shadow-sm p-6 animate-fade-in">
+          <div className="flex flex-col space-y-5">
+            <Link 
+              href="/" 
+              className="text-base font-medium transition-colors hover:text-primary"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Home
+            </Link>
+            <Link 
+              href="/features" 
+              className="text-base font-medium transition-colors hover:text-primary"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Features
+            </Link>
+            <Link 
+              href="/pricing" 
+              className="text-base font-medium transition-colors hover:text-primary"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Pricing
+            </Link>
+            <div className="pt-2 flex flex-col space-y-3">
+              <Link 
+                href="/signin" 
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Button variant="outline" className="w-full">Sign In</Button>
+              </Link>
+              <Link 
+                href="/signup" 
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Button className="w-full">Sign Up</Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+    </nav>
+  );
+};
+
+export default Navbar;
