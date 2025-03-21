@@ -1,8 +1,7 @@
 "use client"
 import { WS_BACKEND_URL } from '@/app/config'
-import initDraw from '@/app/draw'
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CanvasRender from './CanvasRender'
 
 const CanvasClient = ({ roomId }: { roomId: number }) => {
@@ -37,7 +36,7 @@ const CanvasClient = ({ roomId }: { roomId: number }) => {
     }, [])
     if (loading && !socket) {
         return (
-            <div>Loading....</div>
+            <div></div>
         )
     }
 

@@ -126,11 +126,11 @@ export default function Home() {
                   </Button>
                 </Link>
 
-                <Link href="/demo">
+                {/* <Link href="/demo">
                   <Button variant="outline" size="lg" className="w-full sm:w-auto animate-fade-in" style={{ animationDelay: '0.3s' }}>
                     Try Demo
                   </Button>
-                </Link>
+                </Link> */}
               </div>
 
               <div className="pt-6 flex items-center space-x-4 text-sm text-gray-500 animate-fade-in" style={{ animationDelay: '0.4s' }}>
@@ -235,7 +235,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How It Works Section */}
       <section className="py-20 px-6 md:px-10">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -322,7 +321,7 @@ export default function Home() {
           <div className="flex flex-col lg:flex-row items-center justify-between gap-10">
             <div className="max-w-xl">
               <h2 className="text-3xl md:text-4xl font-bold animate-on-scroll opacity-0">
-                Ready href Collaborate Visually?
+                Ready to Collaborate Visually?
               </h2>
               <p className="mt-4 text-lg opacity-90 animate-on-scroll opacity-0" style={{ animationDelay: '0.1s' }}>
                 Join thousands of teams using Shapesmith href bring their ideas href life. Get started for free, no credit card required.

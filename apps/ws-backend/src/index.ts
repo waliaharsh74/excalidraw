@@ -159,7 +159,7 @@ wss.on("connection", (socket, request) => {
                         return;
                 }
 
-                await prismaClient.shape.create({
+                const shapeSaved=await prismaClient.shape.create({
                     data: shapePayload,
                 });
                
@@ -170,6 +170,7 @@ wss.on("connection", (socket, request) => {
                     if (user.rooms && user.rooms.includes(parsedData.roomId )) {
                         if (user.ws && user.ws.readyState === WebSocket.OPEN) {
                             user.ws.send(JSON.stringify({
+                                shapeId: shapeSaved.shapeId,
                                 type: "shape",
                                 ShapeType: parsedData.shapeType,
                                 roomId: parsedData.roomId,
@@ -184,6 +185,45 @@ wss.on("connection", (socket, request) => {
                         console.log(`User ${user.userId} is not in room ${parsedData.roomId}`);
                     }
                 });
+
+
+
+            }
+            if (parsedData.type === "deleteShape") {
+
+                console.log(parsedData);
+                const { shapeId, roomId,  } = parsedData
+               
+
+
+                await prismaClient.shape.delete({
+                    where:{
+                        shapeId,
+                        roomId
+                    }
+                });
+               
+
+
+                // users.forEach(user => {
+
+                //     if (user.rooms && user.rooms.includes(parsedData.roomId )) {
+                //         if (user.ws && user.ws.readyState === WebSocket.OPEN) {
+                //             user.ws.send(JSON.stringify({
+                //                 type: "shape",
+                //                 ShapeType: parsedData.shapeType,
+                //                 roomId: parsedData.roomId,
+                //                 color,
+                //                 ...shapeData
+                //             }));
+                //             console.log("Message sent to user:", user.userId);
+                //         } else {
+                //             console.log(`WebSocket not open for user ${user.userId}`);
+                //         }
+                //     } else {
+                //         console.log(`User ${user.userId} is not in room ${parsedData.roomId}`);
+                //     }
+                // });
 
 
 

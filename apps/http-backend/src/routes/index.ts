@@ -163,7 +163,7 @@ router.post('/get-room/:id', async (req, res) => {
 
 
 })
-router.post('/get-slug/:slug', async (req, res) => {
+router.post('/get-slug/:slug', middleware, async (req, res) => {
     try {
 
         const slug = (req.params.slug);
@@ -173,6 +173,7 @@ router.post('/get-slug/:slug', async (req, res) => {
             },
 
         })
+        console.log("roomId",roomId);
         res.json({
             msg: "room-Id fetched Successfully",
             roomId: roomId?.roomId
