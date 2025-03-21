@@ -130,29 +130,33 @@ export default function SignUp() {
                                 {err && err?.email && <div className="">{err?.email[0]}</div>}
                             </div>
                             <div>
-                                <Label htmlFor="password" >
-                                    Password
-                                </Label>
-                                <Input
-                                    
-                                    id="password"
-                                    value={password}
-                                    placeholder="Create your password"
-                                    type={showPassword ? "text" : "password"}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    required
+                                <div className="flex items-center justify-between">
+                                    <Label htmlFor="password">Password</Label>
 
-                                />
-                                <button
-                                    type="button"
-                                    onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-                                    aria-label={showPassword ? "Hide password" : "Show password"}
-                                >
+                                </div>
 
-                                    {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                                </button>
-                                {err && err?.password && <div className="">{err?.password[0]}</div>}
+                                <div className="relative">
+                                    <Input
+
+                                        id="password"
+                                        value={password}
+                                        placeholder="Create your password"
+                                        type={showPassword ? "text" : "password"}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        required
+
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                                        aria-label={showPassword ? "Hide password" : "Show password"}
+                                    >
+
+                                        {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                                    </button>
+                                    {err && err?.password && <div className="">{err?.password[0]}</div>}
+                                </div>
                             </div>
 
 
