@@ -79,7 +79,7 @@ const CanvasRender = ({ socket, roomId }: { socket: WebSocket | null; roomId: nu
 
 
     return (
-        <div className='flex flex-col w-full h-screen pt-16'>
+        <div className='flex flex-col  h-screen pt-16'>
             <div className="bg-[#232329] flex justify-center gap-2 py-2 z-10 sticky top-16">
                 <button onClick={() => setSelectedShape('rectangle')} className={`px-4 py-2 text-white bg rounded ${selectedShape ==='rectangle'? 'bg-black':''}`}>
                     <RectangleHorizontal />
@@ -113,7 +113,7 @@ const CanvasRender = ({ socket, roomId }: { socket: WebSocket | null; roomId: nu
                 </div>
             </div>
                     
-            <canvas className="bg-black absolute" ref={canvasRef} width={windowSize.width} height={windowSize.height}></canvas>
+            <canvas className="bg-black absolute" ref={canvasRef} width={windowSize.width+1} height={windowSize.height-64}></canvas>
 
             <div className='relative text-white'>
                 {/* <div className="flex items-center">

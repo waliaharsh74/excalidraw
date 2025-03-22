@@ -34,11 +34,11 @@ const Navbar = () => {
 
   return (
     <nav 
-      className={`fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-10 transition-all duration-300 ${
+      className={`fixed w-full top-0 left-0 right-0 z-50 py-4 px-6 md:px-10 transition-all duration-300 ${
         isScrolled ? 'bg-white/80 backdrop-blur-lg shadow-sm' : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="max-w-full mx-auto flex items-center justify-between">
         <Link 
           href="/" 
           className="flex items-center space-x-2"
@@ -50,7 +50,6 @@ const Navbar = () => {
           <span className="text-xl font-semibold tracking-tight">Shapesmith</span>
         </Link>
 
-        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
          
           {!login && <div className="flex items-center space-x-4">
@@ -99,21 +98,8 @@ const Navbar = () => {
             >
               Home
             </Link>
-            <Link 
-              href="/features" 
-              className="text-base font-medium transition-colors hover:text-primary"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Features
-            </Link>
-            <Link 
-              href="/pricing" 
-              className="text-base font-medium transition-colors hover:text-primary"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Pricing
-            </Link>
-            <div className="pt-2 flex flex-col space-y-3">
+
+            {!login && <div className="pt-2 flex flex-col space-y-3">
               <Link 
                 href="/signin" 
                 onClick={() => setMobileMenuOpen(false)}
@@ -126,7 +112,12 @@ const Navbar = () => {
               >
                 <Button className="w-full">Sign Up</Button>
               </Link>
-            </div>
+            </div>}
+            {login && <div className="pt-2 flex flex-col space-y-3">
+
+              <Button  className="w-full " onClick={handleLogOut}><UserIcon className="h-5 w-5 mr-1" />
+                  Logout</Button>
+            </div>}
           </div>
         </div>
       )}
