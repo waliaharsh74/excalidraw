@@ -3,6 +3,7 @@ import { WS_BACKEND_URL } from '@/app/config'
 
 import React, { useEffect, useState } from 'react'
 import CanvasRender from './CanvasRender'
+import { withProtectedRoute } from '@/app/context/withProtectedRoute'
 
 const CanvasClient = ({ roomId }: { roomId: number }) => {
     const [socket, setSocket] = useState<WebSocket | null>(null)
@@ -46,4 +47,4 @@ const CanvasClient = ({ roomId }: { roomId: number }) => {
     )
 }
 
-export default CanvasClient
+export default withProtectedRoute(CanvasClient)

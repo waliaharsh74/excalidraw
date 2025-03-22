@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { useRouter } from "next/navigation"
 import {  toast } from 'react-toastify';
 import {  signInSchema } from "@repo/common/types";
@@ -10,6 +10,8 @@ import {  Eye, EyeOff } from 'lucide-react';
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
+import { AuthContext } from "../context/AuthContext";
+
 import axios from "axios"
 
 interface signInError{
@@ -22,7 +24,11 @@ export default function SignIn() {
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-
+    const context = useContext(AuthContext);
+    if (!context) {
+        return null;
+    }
+    const { setLogin } = context;
    
     const [err, setErr] = useState<signInError>({})
     const router = useRouter()
@@ -49,6 +55,7 @@ export default function SignIn() {
             }, 1500);
             if (result.data?.token){
                 localStorage.setItem("shapeSmithToken", result.data?.token)
+                setLogin(true);
                 router.push('/home')
             }
             

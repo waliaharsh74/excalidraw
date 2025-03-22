@@ -7,8 +7,9 @@ import {useRouter} from "next/navigation"
 import { Button } from "../components/ui/button";
 import { ArrowRight } from "lucide-react"
 import ShapePreview from "../components/ShapePreview"
+import { withProtectedRoute } from "../context/withProtectedRoute"
 
-export default function Home() {
+function Home() {
   const [login,setLogin]=useState(false);
   const router = useRouter();
   useEffect(()=>{
@@ -104,3 +105,4 @@ export default function Home() {
   )
 }
 
+export default withProtectedRoute(Home)

@@ -97,6 +97,9 @@ router.post('/sign-in', async (req, res) => {
 router.post('/create-room', middleware, async (req, res) => {
     // @ts-ignore: 
     const userId = req.userId
+    try {
+        
+    
     const parsedData = CreateRoomSchema.safeParse(req.body);
     if (!parsedData.success) {
         res.json({
@@ -113,7 +116,7 @@ router.post('/create-room', middleware, async (req, res) => {
     if(isSlug){
         res.json({
             fieldErrors:"Bad Request",
-            msg: "Slug with this name already exists!"
+            msg: "Slug with this name already exists! try joining it"
         })
         return
     }
@@ -128,6 +131,14 @@ router.post('/create-room', middleware, async (req, res) => {
         roomId: room.roomId
 
     })
+    } catch (error) {
+        console.log(error);
+        res.json({
+            msg: "Some error occurred please try after some time!",
+            
+
+        })
+    }
 
 
 })
@@ -172,6 +183,9 @@ router.post('/get-slug/:slug', middleware, async (req, res) => {
                 slug
             },
 
+        })
+        if (!roomId) res.json({
+            msg: "No room exists for this name try creating one",
         })
         console.log("roomId",roomId);
         res.json({

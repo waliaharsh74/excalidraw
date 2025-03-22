@@ -1,29 +1,38 @@
 "use client"
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Link  from 'next/link';
 import { Button } from "../components/ui/button";
 import { Menu, UserIcon, X } from 'lucide-react';
+import { AuthContext } from "../context/AuthContext";
+
 import { useRouter } from "next/navigation";
 
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-   const [login, setLogin] = useState(false);
+  const context = useContext(AuthContext);
+      if (!context) {
+          return null;
+      }
+  const { login, handleLogOut } = context
+  // const { login, handleLogOut } = useContext(AuthContext);
+
+  //  const [login, setLogin] = useState(false);
       const router = useRouter();
-      const handleLogOut =()=>{
-        localStorage.removeItem("shapeSmithToken")
-        setLogin(false)
+
+      const handleLogOutNav =()=>{
+        handleLogOut();
         router.push('/')
       }
       
   useEffect(() => {
     const userLogin = localStorage.getItem("shapeSmithToken")
 
-    if (userLogin) {
-      setLogin(true)
+    // if (userLogin) {
+    //   setLogin(true)
 
-    }
+    // }
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
@@ -67,7 +76,7 @@ const Navbar = () => {
           {login && <div className="flex items-center space-x-4">
             
             
-              <Button size="sm" className="px-4" onClick={handleLogOut}>
+            <Button size="sm" className="px-4" onClick={handleLogOutNav}>
               <UserIcon className="h-5 w-5 mr-1" />
               Logout
               </Button>

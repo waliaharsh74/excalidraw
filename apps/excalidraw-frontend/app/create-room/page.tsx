@@ -9,6 +9,7 @@ import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { CreateRoomSchema } from "@repo/common/types";
+import { withProtectedRoute } from "../context/withProtectedRoute";
 
 import axios from "axios"
 interface SlugError {
@@ -16,7 +17,7 @@ interface SlugError {
 
 }
 
-export default function CreateRoom() {
+ function CreateRoom() {
     const [slug, setSlug] = useState("")
     const [loading, setLoading] = useState(false);
 
@@ -150,3 +151,4 @@ export default function CreateRoom() {
     )
 }
 
+export default withProtectedRoute(CreateRoom)

@@ -12,6 +12,7 @@ import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import axios from "axios"
 import { CreateRoomSchema } from "@repo/common/types";
+import { withProtectedRoute } from "../context/withProtectedRoute";
 
 
 interface SlugError {
@@ -19,7 +20,7 @@ interface SlugError {
 
 }
 
-export default function JoinRoom() {
+ function JoinRoom() {
     const [slug, setSlug] = useState("")
     const [loading, setLoading] = useState(false);
 
@@ -154,3 +155,4 @@ export default function JoinRoom() {
     )
 }
 
+export default withProtectedRoute(JoinRoom)
