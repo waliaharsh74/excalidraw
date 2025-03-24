@@ -184,9 +184,11 @@ router.post('/get-slug/:slug', middleware, async (req, res) => {
             },
 
         })
-        if (!roomId) res.json({
+        if (!roomId) {res.json({
             msg: "No room exists for this name try creating one",
         })
+        return
+        }
         console.log("roomId",roomId);
         res.json({
             msg: "room-Id fetched Successfully",
