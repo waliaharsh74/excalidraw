@@ -28,7 +28,7 @@ const RoomCard = ({ id, name, participants, createdAt, thumbnailColor = 'bg-blue
         <div className="absolute w-10 h-10 bg-green-500/60 left-[40%] top-[60%] transform rotate-45"></div>
         
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/30 transition-opacity">
-          <Link href={getRoomUrl()}>
+          <Link href="/signin">
             <Button className="transition-transform transform group-hover:scale-105">
               Join Room
             </Button>

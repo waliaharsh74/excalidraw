@@ -1,9 +1,11 @@
 import { WebSocketServer, WebSocket } from "ws";
+import 'dotenv/config'
 import Jwt from "jsonwebtoken";
-import { JWT_SECRET } from "@repo/backend-common/config"
 import { prismaClient } from "@repo/db"
+const JWT_SECRET: string = process.env.JWT_SECRET || "";
 const port=process.env.PORT 
-const wss = new WebSocketServer({ port: typeof port === "string" ? parseInt(port, 10) : port });
+console.log(port);
+const wss = new WebSocketServer({ port: typeof port === "string" ? parseInt(port) : port });
 const sockets: WebSocket[] = []
 interface User {
     ws: WebSocket,

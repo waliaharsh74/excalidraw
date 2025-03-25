@@ -3,10 +3,10 @@ const router: Router = express.Router()
 import { prismaClient } from "@repo/db"
 import { signUpSchema, signInSchema, CreateRoomSchema } from "@repo/common/types";
 import bcrypt from "bcrypt"
-import { JWT_SECRET } from "@repo/backend-common/config"
 import jwt from "jsonwebtoken"
 import { middleware } from "../middleware";
-
+import 'dotenv/config'
+ const JWT_SECRET: string = process.env.JWT_SECRET || "";
 router.post('/sign-up', async (req, res) => {
     try {
 
@@ -84,6 +84,7 @@ router.post('/sign-in', async (req, res) => {
         })
         return
     }
+    console.log("JWT_SECRET", JWT_SECRET);
     const token = jwt.sign({
         userId: user?.userId
     }, JWT_SECRET);

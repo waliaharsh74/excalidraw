@@ -11,6 +11,8 @@ import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { AuthContext } from "../context/AuthContext";
+import 'dotenv/config'
+
 
 import axios from "axios"
 import { HTTP_BACKEND_URL } from "../config";
@@ -46,6 +48,9 @@ export default function SignIn() {
                 return
             }
             setLoading(true);
+            const url = `${HTTP_BACKEND_URL}api/v1/sign-in`
+            console.log(url);
+
             const result = await axios.post(`${HTTP_BACKEND_URL}/api/v1/sign-in`, {
                 email, password
             })

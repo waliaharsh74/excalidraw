@@ -173,7 +173,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features Section */}
       <section className="py-20 px-6 md:px-10 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -252,7 +251,7 @@ export default function Home() {
                 <div className="lg:text-right">
                   <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground font-bold text-xl mb-4 lg:ml-auto">1</div>
                   <h3 className="text-xl font-semibold mb-2">Create an Account</h3>
-                  <p className="text-gray-600">Sign up for a free account href get started with Shapesmith.</p>
+                  <p className="text-gray-600">Sign up for a free account to get started with Shapesmith.</p>
                 </div>
                 <div className="hidden lg:block absolute right-0 top-8 w-8 h-0.5 bg-gray-200 translate-x-4"></div>
               </div>
@@ -268,7 +267,7 @@ export default function Home() {
                 <div className="lg:text-right">
                   <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground font-bold text-xl mb-4 lg:ml-auto">3</div>
                   <h3 className="text-xl font-semibold mb-2">Draw & Collaborate</h3>
-                  <p className="text-gray-600">Use our intuitive tools href create shapes, add text, and collaborate in real-time.</p>
+                  <p className="text-gray-600">Use our intuitive tools to create shapes, add text, and collaborate in real-time.</p>
                 </div>
                 <div className="hidden lg:block absolute right-0 top-40 w-8 h-0.5 bg-gray-200 translate-x-4"></div>
               </div>
@@ -280,7 +279,7 @@ export default function Home() {
       </section>
 
       {/* Demo Section */}
-      <section className="py-20 px-6 md:px-10 bg-gradient-radial from-white href-gray-50">
+      <section className="py-20 px-6 md:px-10 bg-gradient-radial from-white to-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4 animate-on-scroll opacity-0">
@@ -290,7 +289,7 @@ export default function Home() {
               See Shapesmith in Action
             </h2>
             <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto animate-on-scroll opacity-0" style={{ animationDelay: '0.2s' }}>
-              Try out these example rooms or create your own href experience the power of collaborative drawing.
+              Try out these example rooms or create your own to experience the power of collaborative drawing.
             </p>
           </div>
 
@@ -324,7 +323,7 @@ export default function Home() {
                 Ready to Collaborate Visually?
               </h2>
               <p className="mt-4 text-lg opacity-90 animate-on-scroll opacity-0" style={{ animationDelay: '0.1s' }}>
-                Join thousands of teams using Shapesmith href bring their ideas href life. Get started for free, no credit card required.
+                Join thousands of teams using Shapesmith to bring their ideas to life. Get started for free, no credit card required.
               </p>
 
               <div className="mt-8 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">

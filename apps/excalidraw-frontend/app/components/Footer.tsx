@@ -22,7 +22,7 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a 
-                href="https://github.com" 
+                href="https://github.com/waliaharsh74" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-gray-400 hover:text-gray-800 transition-colors"
@@ -31,7 +31,7 @@ const Footer = () => {
                 <Github size={18} />
               </a>
               <a 
-                href="https://twitter.com" 
+                href="https://x.com/harsh_walia" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-gray-400 hover:text-blue-500 transition-colors"
@@ -40,7 +40,7 @@ const Footer = () => {
                 <Twitter size={18} />
               </a>
               <a 
-                href="https://linkedin.com" 
+                href="https://www.linkedin.com/in/waliaharsh/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-gray-400 hover:text-blue-700 transition-colors"
@@ -55,22 +55,22 @@ const Footer = () => {
             <h3 className="font-medium mb-4">Product</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/features" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                <Link href="/" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   Features
                 </Link>
               </li>
               <li>
-                <Link href="/pricing" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                <Link href="/" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   Pricing
                 </Link>
               </li>
               <li>
-                <Link href="/roadmap" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                <Link href="/" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   Roadmap
                 </Link>
               </li>
               <li>
-                <Link href="/changelog" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                <Link href="/" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   Changelog
                 </Link>
               </li>
@@ -81,22 +81,22 @@ const Footer = () => {
             <h3 className="font-medium mb-4">Resources</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/help" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                <Link href="/" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   Help Center
                 </Link>
               </li>
               <li>
-                <Link href="/tuhrefrials" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                <Link href="/" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   Tuhrefrials
                 </Link>
               </li>
               <li>
-                <Link href="/documentation" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                <Link href="/" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   Documentation
                 </Link>
               </li>
               <li>
-                <Link href="/community" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                <Link href="/" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   Community
                 </Link>
               </li>
@@ -107,22 +107,22 @@ const Footer = () => {
             <h3 className="font-medium mb-4">Company</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/about" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                <Link href="/" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                <Link href="/" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   Blog
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                <Link href="/" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   Contact
                 </Link>
               </li>
               <li>
-                <Link href="/careers" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                <Link href="/" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   Careers
                 </Link>
               </li>
@@ -135,13 +135,13 @@ const Footer = () => {
             &copy; {currentYear} Shapesmith. All rights reserved.
           </p>
           <div className="mt-4 md:mt-0 flex space-x-6">
-            <Link href="/terms" className="text-sm text-gray-500 hover:text-gray-900 transition-colors">
+            <Link href="/" className="text-sm text-gray-500 hover:text-gray-900 transition-colors">
               Terms of Service
             </Link>
-            <Link href="/privacy" className="text-sm text-gray-500 hover:text-gray-900 transition-colors">
+            <Link href="/" className="text-sm text-gray-500 hover:text-gray-900 transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/cookies" className="text-sm text-gray-500 hover:text-gray-900 transition-colors">
+            <Link href="/" className="text-sm text-gray-500 hover:text-gray-900 transition-colors">
               Cookies
             </Link>
           </div>
