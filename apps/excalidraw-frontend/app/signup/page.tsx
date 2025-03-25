@@ -4,17 +4,16 @@ import type React from "react"
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { motion } from "framer-motion"
 import { toast, ToastContainer } from "react-toastify"
 import { signUpSchema } from "@repo/common/types"
 
-import { signInSchema } from "@repo/common/types";
 import Link from 'next/link';
 import { Eye, EyeOff } from 'lucide-react';
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import axios from "axios"
+import { HTTP_BACKEND_URL } from "../config"
 
 interface signUpError {
     firstName?: string[] | undefined;
@@ -47,7 +46,7 @@ export default function SignUp() {
             }
             setLoading(true);
 
-            const result = await axios.post("http://localhost:3003/api/v1/sign-up", {
+            const result = await axios.post(`${HTTP_BACKEND_URL}/api/v1/sign-up`, {
                 firstName, lastName, email, password
             })
             toast(result.data?.msg);
@@ -213,6 +212,7 @@ export default function SignUp() {
                     </div>
                 </div>
             </div>
+            <ToastContainer/>,
         </div>
     )
 }

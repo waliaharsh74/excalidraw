@@ -13,6 +13,7 @@ import { Label } from "../components/ui/label";
 import { AuthContext } from "../context/AuthContext";
 
 import axios from "axios"
+import { HTTP_BACKEND_URL } from "../config";
 
 interface signInError{
     email?: string[] | undefined;
@@ -23,6 +24,7 @@ export default function SignIn() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false);
+
     const [showPassword, setShowPassword] = useState(false);
     const context = useContext(AuthContext);
     if (!context) {
@@ -44,7 +46,7 @@ export default function SignIn() {
                 return
             }
             setLoading(true);
-            const result = await axios.post("http://localhost:3003/api/v1/sign-in", {
+            const result = await axios.post(`${HTTP_BACKEND_URL}/api/v1/sign-in`, {
                 email, password
             })
             toast(result.data?.msg);

@@ -2,7 +2,8 @@ import { WebSocketServer, WebSocket } from "ws";
 import Jwt from "jsonwebtoken";
 import { JWT_SECRET } from "@repo/backend-common/config"
 import { prismaClient } from "@repo/db"
-const wss = new WebSocketServer({ port: 8080 });
+const port=process.env.PORT 
+const wss = new WebSocketServer({ port: typeof port === "string" ? parseInt(port, 10) : port });
 const sockets: WebSocket[] = []
 interface User {
     ws: WebSocket,
@@ -189,19 +190,20 @@ wss.on("connection", (socket, request) => {
 
 
             }
+            // incomplete
             if (parsedData.type === "deleteShape") {
 
-                console.log(parsedData);
-                const { shapeId, roomId,  } = parsedData
+                // console.log(parsedData);
+                // const { shapeId, roomId,  } = parsedData
                
 
 
-                await prismaClient.shape.delete({
-                    where:{
-                        shapeId,
-                        roomId
-                    }
-                });
+                // await prismaClient.shape.delete({
+                //     where:{
+                //         shapeId,
+                //         roomId
+                //     }
+                // });
                
 
 

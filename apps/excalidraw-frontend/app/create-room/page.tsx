@@ -12,6 +12,7 @@ import { CreateRoomSchema } from "@repo/common/types";
 import { withProtectedRoute } from "../context/withProtectedRoute";
 
 import axios from "axios"
+import { HTTP_BACKEND_URL } from "../config";
 interface SlugError {
     slug?: string[] | undefined;
 
@@ -38,7 +39,7 @@ interface SlugError {
             }
             setLoading(true);
 
-            const result = await axios.post("http://localhost:3003/api/v1/create-room", { slug }, {
+            const result = await axios.post(`${HTTP_BACKEND_URL}/api/v1/create-room`, { slug }, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

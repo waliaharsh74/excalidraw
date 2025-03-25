@@ -4,15 +4,13 @@ import type React from "react"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { toast, ToastContainer } from 'react-toastify';
-import { signInSchema } from "@repo/common/types";
-import Link from 'next/link';
-import { Eye, EyeOff } from 'lucide-react';
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import axios from "axios"
 import { CreateRoomSchema } from "@repo/common/types";
 import { withProtectedRoute } from "../context/withProtectedRoute";
+import { HTTP_BACKEND_URL } from "../config";
 
 
 interface SlugError {
@@ -42,7 +40,7 @@ interface SlugError {
             }
 
             setLoading(true);
-            const result = await axios.post(`http://localhost:3003/api/v1/get-slug/${slug}`,{}, {
+            const result = await axios.post(`${HTTP_BACKEND_URL}/api/v1/get-slug/${slug}`,{}, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
