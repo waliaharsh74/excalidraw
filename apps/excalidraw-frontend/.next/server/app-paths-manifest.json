@@ -1,0 +1,11 @@
+{
+  "/_not-found": "app/_not-found.js",
+  "/canvas/[roomId]/page": "app/canvas/[roomId]/page.js",
+  "/create-room/page": "app/create-room/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/home/page": "app/home/page.js",
+  "/join-room/page": "app/join-room/page.js",
+  "/page": "app/page.js",
+  "/signin/page": "app/signin/page.js",
+  "/signup/page": "app/signup/page.js"
+}
