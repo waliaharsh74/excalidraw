@@ -7,6 +7,11 @@ import jwt from "jsonwebtoken"
 import { middleware } from "../middleware";
 import 'dotenv/config'
  const JWT_SECRET: string = process.env.JWT_SECRET || "";
+router.get('/', async (req, res) => {
+   res.json({
+    msg:"hello"
+   })
+})
 router.post('/sign-up', async (req, res) => {
     try {
 
