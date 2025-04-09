@@ -51,7 +51,7 @@ export default function SignUp() {
             })
             toast(result.data?.msg);
             setTimeout(() => {
-                toast.success('Account created successfully!');
+               
                 setLoading(false);
             }, 1500);
             if (result.data?.id) {
@@ -97,7 +97,7 @@ export default function SignUp() {
                                 />
                                 {err && err?.firstName && <div className="">{err?.firstName[0]}</div>}
                             </div>
-                            <div>
+                            <div className="space-y-4">
                                 <Label htmlFor="lastName" >
                                     Last Name
                                 </Label>
@@ -113,7 +113,7 @@ export default function SignUp() {
                                 />
                                 {err && err?.lastName && <div className="">{err?.lastName[0]}</div>}
                             </div>
-                            <div>
+                            <div className="space-y-4">
                                 <Label htmlFor="email" >
                                     Email
                                 </Label>
@@ -128,7 +128,7 @@ export default function SignUp() {
                                 />
                                 {err && err?.email && <div className="">{err?.email[0]}</div>}
                             </div>
-                            <div>
+                            <div className="space-y-4">
                                 <div className="flex items-center justify-between">
                                     <Label htmlFor="password">Password</Label>
 

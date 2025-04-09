@@ -56,7 +56,7 @@ export default function SignIn() {
             })
             toast(result.data?.msg);
             setTimeout(() => {
-                toast.success('Signed in successfully!');
+                
                 setLoading(false);
                
             }, 1500);

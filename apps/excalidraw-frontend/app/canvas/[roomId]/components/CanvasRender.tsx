@@ -54,15 +54,7 @@ const CanvasRender = ({ socket, roomId }: { socket: WebSocket | null; roomId: nu
         };
     }, [canvasRef, selectedShape, color, socket, roomId]);
 
-    // useEffect(() => {
-    //     if (canvasRef.current) {
-    //         if (selectedShape === 'pan') {
-    //             canvasRef.current.style.cursor = 'grab';
-    //         } else {
-    //             canvasRef.current.style.cursor = 'default'; 
-    //         }
-    //     }
-    // }, [selectedShape]);
+ 
 
 
     const zoomIn = () => {
