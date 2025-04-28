@@ -17,15 +17,15 @@
       "static/css/18d8de5cc42a6b09.css",
       "static/chunks/app/layout-0e9dd273005cefef.js"
     ],
-    "/home/page": [
+    "/create-room/page": [
       "static/chunks/webpack-9c5c41548c659c90.js",
       "static/chunks/ada035fc-74a4deb9a30c6388.js",
       "static/chunks/767-f687751b79797523.js",
       "static/chunks/main-app-89d6f6bf02dcb218.js",
       "static/chunks/633-d2c2a13705737a2b.js",
-      "static/chunks/668-df97bf0b3f6664e0.js",
-      "static/chunks/726-c0e65e5e9e386134.js",
-      "static/chunks/app/home/page-59ddac5a3a8b1650.js"
+      "static/chunks/647-6f63972a5df0f228.js",
+      "static/chunks/601-78ea0baa032938b0.js",
+      "static/chunks/app/create-room/page-631f187f893a5567.js"
     ],
     "/canvas/[roomId]/page": [
       "static/chunks/webpack-9c5c41548c659c90.js",
@@ -34,17 +34,6 @@
       "static/chunks/main-app-89d6f6bf02dcb218.js",
       "static/chunks/647-6f63972a5df0f228.js",
       "static/chunks/app/canvas/[roomId]/page-8114bebed90e6f39.js"
-    ],
-    "/signup/page": [
-      "static/chunks/webpack-9c5c41548c659c90.js",
-      "static/chunks/ada035fc-74a4deb9a30c6388.js",
-      "static/chunks/767-f687751b79797523.js",
-      "static/chunks/main-app-89d6f6bf02dcb218.js",
-      "static/chunks/633-d2c2a13705737a2b.js",
-      "static/chunks/647-6f63972a5df0f228.js",
-      "static/chunks/668-df97bf0b3f6664e0.js",
-      "static/chunks/601-78ea0baa032938b0.js",
-      "static/chunks/app/signup/page-58a9a094e9527ed6.js"
     ],
     "/signin/page": [
       "static/chunks/webpack-9c5c41548c659c90.js",
@@ -59,6 +48,25 @@
       "static/chunks/446-58a1e431e31e661f.js",
       "static/chunks/app/signin/page-64639990f8225804.js"
     ],
+    "/home/page": [
+      "static/chunks/webpack-9c5c41548c659c90.js",
+      "static/chunks/ada035fc-74a4deb9a30c6388.js",
+      "static/chunks/767-f687751b79797523.js",
+      "static/chunks/main-app-89d6f6bf02dcb218.js",
+      "static/chunks/633-d2c2a13705737a2b.js",
+      "static/chunks/668-df97bf0b3f6664e0.js",
+      "static/chunks/726-c0e65e5e9e386134.js",
+      "static/chunks/app/home/page-59ddac5a3a8b1650.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-9c5c41548c659c90.js",
+      "static/chunks/ada035fc-74a4deb9a30c6388.js",
+      "static/chunks/767-f687751b79797523.js",
+      "static/chunks/main-app-89d6f6bf02dcb218.js",
+      "static/chunks/633-d2c2a13705737a2b.js",
+      "static/chunks/668-df97bf0b3f6664e0.js",
+      "static/chunks/app/page-545e15f2c4ce2e34.js"
+    ],
     "/join-room/page": [
       "static/chunks/webpack-9c5c41548c659c90.js",
       "static/chunks/ada035fc-74a4deb9a30c6388.js",
@@ -69,24 +77,16 @@
       "static/chunks/601-78ea0baa032938b0.js",
       "static/chunks/app/join-room/page-82a7acefd3f78462.js"
     ],
-    "/create-room/page": [
+    "/signup/page": [
       "static/chunks/webpack-9c5c41548c659c90.js",
       "static/chunks/ada035fc-74a4deb9a30c6388.js",
       "static/chunks/767-f687751b79797523.js",
       "static/chunks/main-app-89d6f6bf02dcb218.js",
       "static/chunks/633-d2c2a13705737a2b.js",
       "static/chunks/647-6f63972a5df0f228.js",
-      "static/chunks/601-78ea0baa032938b0.js",
-      "static/chunks/app/create-room/page-631f187f893a5567.js"
-    ],
-    "/page": [
-      "static/chunks/webpack-9c5c41548c659c90.js",
-      "static/chunks/ada035fc-74a4deb9a30c6388.js",
-      "static/chunks/767-f687751b79797523.js",
-      "static/chunks/main-app-89d6f6bf02dcb218.js",
-      "static/chunks/633-d2c2a13705737a2b.js",
       "static/chunks/668-df97bf0b3f6664e0.js",
-      "static/chunks/app/page-545e15f2c4ce2e34.js"
+      "static/chunks/601-78ea0baa032938b0.js",
+      "static/chunks/app/signup/page-58a9a094e9527ed6.js"
     ]
   }
 }
